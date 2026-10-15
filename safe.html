@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
+    <meta name="description" content="This is the orgional and the best flash video on the 'net. Once found on www.youdontknowwhoiam.org, not found where it belong, right here on...">
+    <title>You are an idiot! (dot safe)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #fff; overflow: hidden; height: 100vh; width: 100vw; cursor: default; user-select: none; display: flex; justify-content: center; align-items: center; position: relative; }
+        .speaker-btn { position: absolute; top: 20px; left: 20px; font-size: 35px; background: none; border: none; cursor: default; z-index: 10000; }
+        .main-container { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; padding: 0; }
+        img { max-width: 100%; height: 100vh; object-fit: contain; display: block; }
+    </style>
+</head>
+<body>
+
+    <button id="speaker-button" class="speaker-btn">🔇</button>
+
+    <div class="main-container">
+        <img id="home-gif" src="You_Are_An_Idiot_screen.gif" alt="Idiot!">
+    </div>
+
+    <audio id="bg-audio" src="you-are-an-idiot.mp3" loop preload="auto"></audio>
+
+    <script>
+        const audio = document.getElementById('bg-audio');
+        const speakerBtn = document.getElementById('speaker-button');
+
+        // Función para reproducir el audio de fondo
+        function playHomeAudio() {
+            if (audio.paused) {
+                audio.load();
+                audio.play()
+                    .then(() => { speakerBtn.textContent = "🔊"; })
+                    .catch(err => console.log("Audio retenido por el navegador:", err));
+            }
+        }
+
+        // Control del altavoz (Mute/Unmute)
+        speakerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (audio.paused) {
+                playHomeAudio();
+            } else {
+                audio.pause();
+                speakerBtn.textContent = "🔇";
+            }
+        });
+
+        // Al hacer clic en cualquier parte de la pantalla, solo se activa el sonido (sin abrir pop-ups)
+        window.addEventListener('click', () => {
+            playHomeAudio();
+        });
+    </script>
+</body>
+</html>
