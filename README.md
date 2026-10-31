@@ -1,2 +1,2 @@
-# youareanidiot-safe
-This is harmless and the best html5 on the 'net. Once found on www.youareanidiot.cc/safe/, not found where it belong, right here on...
+# YouAreAnIdiot
+The official HTML5 port of the legendary infamous YouAreAnIdiot JS Trojan. ☺ ☺ ☺ Once found on www.youdontknowwhoiam.org, preserved here.
